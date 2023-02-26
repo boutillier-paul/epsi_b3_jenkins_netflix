@@ -23,5 +23,10 @@ pipeline {
                 sh "java -jar target/netflix-1.0.0.jar netflix_titles.csv"
             }
         }
+        stage('Deploy on apache server'){
+            steps{
+                sh 'cp -r ./out/. /opt/lampp/htdocs/'
+            }
+        }
     }
 }
