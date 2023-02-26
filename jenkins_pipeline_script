@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy on apache server'){
             steps{
-                sh 'cp -r ./out/. /opt/lampp/htdocs/'
+                sh 'cp -r ./out/. /var/www/html/'
             }
         }
     }
