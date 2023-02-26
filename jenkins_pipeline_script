@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Maven 3.9.0"
+    }
+
+    stages {
+        stage('Fetch resources') {
+            steps {
+                // Get some code from a GitHub repository
+                git "https://github.com/boutillier-paul/epsi_b3_jenkins_netflix"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "mvn package"
+            }
+        }
+        stage('Generate website') {
+            steps {
+                sh "java -jar target/netflix-1.0.0.jar netflix_titles.csv"
+            }
+        }
+    }
+}
